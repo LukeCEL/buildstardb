@@ -11,7 +11,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ## About
-The official development of Celestia stopped in 2011, and most of the catalogs of astronomical objects have not been updated, even though much has happened. In particular, stars.dat, a database of stars for Celestia, still uses the Hipparcos catalogue, but the newer Gaia data releases (Gaia DR1 and DR2) contain much more precise astronomical data for a larger sample of stars.
+The official development of Celestia stopped in 2011, and most of the catalogs of astronomical objects have not been updated, even though we have so much more astronomical data. In particular, stars.dat, a database of stars for Celestia, still uses the Hipparcos catalogue, but the newer Gaia data releases (Gaia DR1 and DR2) contain much more precise astronomical data for a larger sample of stars.
 
 This is where this program comes in. Originally based on buildstardb.pl, a perl script that converts Hipparcos to a stars.dat file, and adds data from the SIMBAD Astronomical Database. Downloading data directly from SIMBAD has a few advantages. Firstly, SIMBAD standardizes its data, which means that we don't have to convert the J2015.5 epoch from Gaia to the J2000 used in Celestia. Second, it allows us to download whatever objects we want, a distinctly good thing since Gaia contains over a billion point sources.
 
