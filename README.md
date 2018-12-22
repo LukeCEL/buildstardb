@@ -36,4 +36,4 @@ Then, remove the headers from each of the files and concatenate them into one bi
 * Updated the spectral class parser. In particular, it can now extract luminosity classes in parentheses (e.g. `K0(III)` becomes `K0III` instead of just `K0`). It also extracts subclasses and luminosity classes that were previously blocked by slashes, dashes, or colons. So, `B0-0.5V` becomes `B0V` instead of just `B0`, and `M1-M2Ia-Iab` becomes `M1Ia` instead of just `M1`.
 
 ## Acknowledgements
-Thanks to Chris Laurel and everyone who helped create Celestia in the first place. Also, I must give thanks to Andrew Tribick (ajtribick) for creating the original file.
+Thanks to Chris Laurel and everyone who helped create Celestia in the first place. Also, a huge thanks to Andrew Tribick (ajtribick) for creating the original file.
