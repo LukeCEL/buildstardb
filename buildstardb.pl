@@ -2,7 +2,7 @@
 
 # buildstardb.pl
 #
-# Builds the stars.dat and revised.stc files for Celestia
+# Builds the stars.dat file for Celestia
 #
 # Version 1.3 - LukeCEL (2018-12-18)
 
