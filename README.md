@@ -34,6 +34,7 @@ Then, remove the headers from each of the files and concatenate them into one bi
 * Changed script so it deals with data from SIMBAD.
 * Added a "statistics" section that counts which sources contributed which coordinates, parallaxes, magnitudes, etc.
 * Updated the spectral class parser. In particular, it can now extract luminosity classes in parentheses (e.g. `K0(III)` becomes `K0III` instead of just `K0`). It also extracts subclasses and luminosity classes that were previously blocked by slashes, dashes, or colons. So, `B0-0.5V` becomes `B0V` instead of just `B0`, and `M1-M2Ia-Iab` becomes `M1Ia` instead of just `M1`.
+* Modified inclusion criteria: now allows parallaxes down to 0.1 mas, while removing parallaxes whose percent errors are greater than 50%.
 
 ## Acknowledgements
 Thanks to Chris Laurel and everyone who helped create Celestia in the first place. Also, a huge thanks to Andrew Tribick (ajtribick) for creating the original file.
