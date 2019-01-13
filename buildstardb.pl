@@ -518,10 +518,10 @@ sub TestDubious
 	$dubious = 1 if($star->{'Vmag'} eq '');
 	
 	# if low, negative or missing parallax, reject
-	$dubious = 1 if(($star->{'Plx'} eq '') || ($star->{'Plx'} < 0.2));
+	$dubious = 1 if(($star->{'Plx'} eq '') || ($star->{'Plx'} < 0.1));
 
-	# if parallax error >= parallax, reject
-	$dubious = 1 if($star->{'Plx'} <= $star->{'e_Plx'});
+	# if parallax error >= half of parallax, reject
+	$dubious = 1 if($star->{'Plx'} / 2 <= $star->{'e_Plx'});
 	
 	# if no position information, reject
 	$dubious = 1 if(($star->{'RAdeg'} eq '') || ($star->{'DEdeg'} eq ''));
