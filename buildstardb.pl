@@ -202,10 +202,6 @@ sub ReadHipparcos
 			'VTmag'     => '',
 			'Hpmag'     => $star{'Hpmag'},
 			'B-V'       => $star{'B-V'},
-			'coordRef'  => '2007A&A...474..653V',
-			'PlxRef'    => '2007A&A...474..653V',
-			'VmagRef'   => '',
-			'SpTypeRef' => ''
 		};
 
 		$numStars++;
@@ -247,8 +243,6 @@ sub ReadOldHipparcos
 			# terminate SpType at first space
 			$stars{$HIP}{'SpType'}    =~ m/^([^\s]*)/;
 			$stars{$HIP}{'SpType'}    = $1;
-			$stars{$HIP}{'VmagRef'}   = '1997A&A...323L..49P'; # so it matches with SIMBAD
-			$stars{$HIP}{'SpTypeRef'} = '1997A&A...323L..49P';
 		}
 
 		# increment tally
@@ -306,10 +300,6 @@ sub ReadSimbad
 			($fields[6] ne '') ? ($stars{$HIP}{'e_Plx'} = $fields[6]) : ($stars{$HIP}{'e_Plx'}),
 			($fields[8] ne '') ? ($stars{$HIP}{'Vmag'} = $fields[8]) : ($stars{$HIP}{'Vmag'}),
 			($fields[10] ne '') ? ($stars{$HIP}{'SpType'} = $fields[10]) : ($stars{$HIP}{'SpType'}),
-			($fields[4] ne '') ? ($stars{$HIP}{'coordRef'} = $fields[4]) : ($stars{$HIP}{'coordRef'}),
-			($fields[7] ne '') ? ($stars{$HIP}{'PlxRef'} = $fields[7]) : ($stars{$HIP}{'PlxRef'}),
-			($fields[9] ne '') ? ($stars{$HIP}{'VmagRef'} = $fields[9]) : ($stars{$HIP}{'VmagRef'}),
-			($fields[11] ne '') ? ($stars{$HIP}{'SpTypeRef'} = $fields[11]) : ($stars{$HIP}{'SpTypeRef'}),
 		}
 
 		# increment tally
@@ -364,77 +354,6 @@ sub WriteDat
 	close(TXTFILE);
 	
 	print "  Wrote a total of $numStars stars.\n";
-
-	# counter for commonly used references, including ones from SIMBAD
-	my $Perrymancoords = 0; # counters for common reference and where they're being used
-	my $vanLeeuwencoords = 0;
-	my $gaiaDR1coords = 0;
-	my $gaiaDR2coords = 0;
-
-	my $PerrymanPlx = 0;
-	my $vanLeeuwenPlx = 0;
-	my $gaiaDR1Plx = 0;
-	my $gaiaDR2Plx = 0;
-
-	my $PerrymanVmag = 0;
-	my $TYC2Vmag = 0;
-	my $YossVmag = 0;
-
-	my $PerrymanSpType = 0;
-	my $HDSpType = 0;
-	my $YossSpType = 0;
-	my $KeenanSpType = 0;
-
-	foreach my $HIP (keys %stars)
-	{
-		if ($stars{$HIP}{'coordRef'} eq '1997A&A...323L..49P') {
-			$Perrymancoords++;
-		} elsif ($stars{$HIP}{'coordRef'} eq '2007A&A...474..653V') {
-			$vanLeeuwencoords++;
-		} elsif ($stars{$HIP}{'coordRef'} eq '2016A&A...595A...2G') {
-			$gaiaDR1coords++;
-		} elsif ($stars{$HIP}{'coordRef'} eq '2018yCat.1345....0G') {
-			$gaiaDR2coords++;
-		}
-
-		if ($stars{$HIP}{'PlxRef'} eq '1997A&A...323L..49P') {
-			$PerrymanPlx++;
-		} elsif ($stars{$HIP}{'PlxRef'} eq '2007A&A...474..653V') {
-			$vanLeeuwenPlx++;
-		} elsif ($stars{$HIP}{'PlxRef'} eq '2016A&A...595A...2G') {
-			$gaiaDR1Plx++;
-		} elsif ($stars{$HIP}{'PlxRef'} eq '2018yCat.1345....0G') {
-			$gaiaDR2Plx++;
-		}
-
-		if ($stars{$HIP}{'VmagRef'} eq '1997A&A...323L..49P') {
-			$PerrymanVmag++;
-		} elsif (index($stars{$HIP}{'VmagRef'}, '2000A&A...355L..27H') != -1) {
-			$TYC2Vmag++;
-		} elsif (index($stars{$HIP}{'VmagRef'}, '1997JApA...18..161Y') != -1) {
-			$YossVmag++;
-		}
-
-		if ($stars{$HIP}{'SpTypeRef'} eq '1997A&A...323L..49P') {
-			$PerrymanSpType++;
-		} elsif (index($stars{$HIP}{'SpTypeRef'}, 'MSS') != -1) {
-			$HDSpType++;
-		} elsif (index($stars{$HIP}{'SpTypeRef'}, '1997JApA...18..161Y') != -1) {
-			$YossSpType++;
-		} elsif (index($stars{$HIP}{'SpTypeRef'}, '1989ApJS...71..245K') != -1) {
-			$KeenanSpType++;
-		}
-	}
-
-	print "Statistics: Hipparcos Catalogue supplied $Perrymancoords coordinates, $PerrymanPlx parallaxes, $PerrymanVmag magnitudes, and $PerrymanSpType spectral types;\n";
-	print "  Hipparcos New Reduction supplied $vanLeeuwencoords coordinates and $vanLeeuwenPlx parallaxes;\n";
-	print "  Gaia DR1 supplied $gaiaDR1coords coordinates and $gaiaDR1Plx parallaxes;\n";
-	print "  Gaia DR2 supplied $gaiaDR2coords coordinates and $gaiaDR2Plx parallaxes;\n";
-	print "  Tycho-2 Catalogue supplied $TYC2Vmag magnitudes;\n";
-	print "  HD Catalogue supplied $HDSpType spectral types;\n";
-	print "  Yoss et al. (1997) supplied $YossVmag magnitudes and $YossSpType spectral types;\n";
-	print "  Keenan & McNeil (1989) supplied $KeenanSpType spectral types\n  (NOTE: minor sources from SIMBAD not included).\n";
-
 }
 
 # -------------------------- DATA HANDLING ROUTINES -------------------------- #
